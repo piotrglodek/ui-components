@@ -29,7 +29,7 @@ const variants = variant({
     contained: css`
       background-color: ${th('color.gray')};
       color: ${th('color.black')};
-      transition: background 0.3s ease;
+      transition: background 0.2s ease;
       &:hover {
         background-color: ${th('color.darkGray')};
       }
@@ -37,10 +37,62 @@ const variants = variant({
     outlined: css`
       color: ${th('color.black')};
       border: 0.2rem solid ${th('color.darkGray')};
-      transition: background 0.3s ease, color 0.3s ease;
+      transition: background 0.2s ease, color 0.2s ease;
       &:hover {
         background-color: ${th('color.darkGray')};
       }
+    `,
+  },
+});
+
+const colors = variant({
+  prop: 'color',
+  variants: {
+    primary: css`
+      ${({ variant }) =>
+        variant === 'contained' &&
+        css`
+          color: ${th('color.white')};
+          background-color: ${th('color.primary')};
+          &:hover {
+            background-color: ${th('color.darkPrimary')};
+          }
+        `}
+      ${({ variant }) =>
+        variant === 'outlined' &&
+        css`
+          color: ${th('color.primary')};
+          background-color: none;
+          border-color: ${th('color.primary')};
+          &:hover {
+            color: ${th('color.white')};
+            border-color: ${th('color.darkPrimary')};
+            background-color: ${th('color.darkPrimary')};
+          }
+        `}
+    `,
+    secondary: css`
+      ${({ variant }) =>
+        variant === 'contained' &&
+        css`
+          color: ${th('color.white')};
+          background-color: ${th('color.secondary')};
+          &:hover {
+            background-color: ${th('color.darkSecondary')};
+          }
+        `}
+      ${({ variant }) =>
+        variant === 'outlined' &&
+        css`
+          color: ${th('color.secondary')};
+          background-color: none;
+          border-color: ${th('color.secondary')};
+          &:hover {
+            color: ${th('color.white')};
+            border-color: ${th('color.darkSecondary')};
+            background-color: ${th('color.darkSecondary')};
+          }
+        `}
     `,
   },
 });
@@ -57,6 +109,7 @@ const BaseButton = styled.button`
   cursor: pointer;
   ${sizes};
   ${variants};
+  ${colors};
 `;
 
 Button.defaultProps = {
@@ -65,6 +118,8 @@ Button.defaultProps = {
 };
 
 Button.propTypes = {
+  // button colors
+  color: PropTypes.oneOf(['primary', 'secondary']),
   // button variants
   variant: PropTypes.oneOf(['contained', 'outlined']),
   // button size
