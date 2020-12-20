@@ -17,6 +17,7 @@ const theme = {
   },
   fontSize: {
     button: '1.4rem',
+    xs: '1.2rem',
   },
   fontWeight: {
     normal: '400',
